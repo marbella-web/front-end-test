@@ -35,17 +35,58 @@
       }
   }
 
+  @function calculateRem($size) {
+    $remSize: $size / 16px;
+    @return #{$remSize}rem;
+  }
+  
+  @mixin fontSize($size) {
+    font-size: $size; //Fallback in px
+    font-size: calculateRem($size);
+  }
+  
 
 
-  #container 
+html, body { margin:0;padding:0; font-size:100%; }
+a { text-decoration: none; color:#000;}
+
+  .container 
   {
       .tabholder 
-      {
-          background:#ccc; 
+      { 
           width:100%;
-          .tabs 
-          {
-              
+          
+          ul 
+          { 
+            display:flex;
+            height:100px; 
+            border-bottom:1px solid #ccc;
+              li 
+              {
+                border-left:1px solid #ccc;
+                border-top:1px solid #ccc;
+                list-style-type: none;
+                font-family: 'Verdana, sans-serif';
+                @include fontSize(20px);
+                font-weight:bold;
+                display:block;
+                    &:last-of-type
+                    {
+                        border-right:1px solid #ccc;
+                    }
+                a 
+                {
+                    display:block; 
+                    height:100%;
+                    width:100%;
+                    padding:20px;
+                    &:hover 
+                    {
+
+                    }
+                }
+              }
           }
+
       }
   }
