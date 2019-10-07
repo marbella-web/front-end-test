@@ -2,91 +2,144 @@
     @media only screen and (max-width: 749px) {
         @content;
     }
-  }
-  
-  @mixin tablet() {
+}
+
+@mixin tablet() {
     @media only screen and (max-width: 980px) {
         @content;
     }
-  }
-  
-  @mixin mobilelandtablet() {
-      @media only screen and (max-width: 980px) and (orientation: landscape)  {
-          @content;
-      }
-  }
-  
-  
-  @mixin desktop() {
+}
+
+@mixin mobilelandtablet() {
+    @media only screen and (max-width: 980px) and (orientation: landscape) {
+        @content;
+    }
+}
+
+
+@mixin desktop() {
     @media only screen and (max-width: 1100px) {
         @content;
     }
-  }
-  
-  @mixin lgdesktop() {
-      @media only screen and (min-width: 1101px) {
-          @content;
-      }
-    }
-  
-    @mixin mobileland() {
-      @media only screen and (min-width: 30em) and (orientation: landscape)  {
-          @content;
-      }
-  }
+}
 
-  @function calculateRem($size) {
+@mixin lgdesktop() {
+    @media only screen and (min-width: 1101px) {
+        @content;
+    }
+}
+
+@mixin mobileland() {
+    @media only screen and (min-width: 30em) and (orientation: landscape) {
+        @content;
+    }
+}
+
+@function calculateRem($size) {
     $remSize: $size / 16px;
     @return #{$remSize}rem;
-  }
-  
-  @mixin fontSize($size) {
+}
+
+@mixin fontSize($size) {
     font-size: $size; //Fallback in px
     font-size: calculateRem($size);
-  }
-  
+}
 
 
-html, body { margin:0;padding:0; font-size:100%; }
-a { text-decoration: none; color:#000;}
 
-  .container 
-  {
-      .tabholder 
-      { 
-          width:100%;
-          
-          ul 
-          { 
-            display:flex;
-            height:100px; 
-            border-bottom:1px solid #ccc;
-              li 
-              {
-                border-left:1px solid #ccc;
-                border-top:1px solid #ccc;
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+.container {
+    padding: 20px;
+
+    .tabholder {
+        width: 100%;
+        display: none;
+
+        ul {
+            display: flex;
+            height: 60px;
+            margin: 0;
+            padding: 0;
+            z-index: 2;
+            align-items: center;
+
+            li {
+                border-left: 1px solid #ccc;
+                border-top: 1px solid #ccc;
                 list-style-type: none;
+                height: 100%;
                 font-family: 'Verdana, sans-serif';
-                @include fontSize(20px);
-                font-weight:bold;
-                display:block;
-                    &:last-of-type
-                    {
-                        border-right:1px solid #ccc;
-                    }
-                a 
-                {
-                    display:block; 
-                    height:100%;
-                    width:100%;
-                    padding:20px;
-                    &:hover 
-                    {
 
+                @include fontSize(20px);
+                font-weight: bold;
+
+                @include mobile() {
+                    @include fontSize(16px);
+                }
+
+                &.active {
+                    background-color: #e6e4e4;
+                }
+
+                &:last-of-type {
+                    border-right: 1px solid #ccc;
+                }
+
+                a {
+                    display: block;
+                    height: 100%;
+                    width: 100%;
+                    padding: 20px;
+
+                    @include mobile() {
+                        padding: 10px;
+                    }
+
+                    box-sizing: border-box;
+                    background-color: #fff;
+
+                    &:hover,
+                    &.active {
+                        background-color: #e6e4e4;
                     }
                 }
-              }
-          }
+            }
+        }
 
-      }
-  }
+    }
+
+    .tab-content {
+        z-index: 1;
+        border: 1px solid #ccc;
+        width: 100%;
+        box-sizing: border-box;
+        background-color: #e6e4e4;
+        margin-top: 0px;
+        padding: 20px;
+
+        @include mobile() {
+            padding: 10px;
+            margin-top: 0px;
+        }
+
+        li {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+
+        }
+
+
+    }
+}
